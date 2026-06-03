@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden Wayanad — Off the Beaten Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest: #1a2e1a;
+    --moss: #2d4a2d;
+    --fern: #4a7a4a;
+    --sage: #7aaa7a;
+    --mist: #c8d8c4;
+    --cream: #f5f0e8;
+    --spice: #c4581a;
+    --gold: #d4a030;
+    --terracotta: #b85030;
+    --ink: #1a1a14;
+    --fog: rgba(255,255,255,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--forest);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(74,122,74,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(196,88,26,0.12) 0%, transparent 60%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-leaves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .leaf {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.08;
+    animation: drift linear infinite;
+  }
+
+  @keyframes drift {
+    0% { transform: translateY(-10%) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.08; }
+    90% { opacity: 0.08; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .hero-tag {
+    font-family: 'Caveat', cursive;
+    color: var(--sage);
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    animation: fadeUp 0.9s ease 0.15s both;
+  }
+
+  .hero-title em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--mist);
+    margin-bottom: 40px;
+    animation: fadeUp 0.9s ease 0.3s both;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    color: rgba(200,216,196,0.8);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 48px;
+    animation: fadeUp 0.9s ease 0.45s both;
+  }
+
+  .hero-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--sage);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeUp 0.9s ease 0.6s both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--sage), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,46,26,0.95);
+    backdrop-filter: blur(12px);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+    border-bottom: 1px solid rgba(122,170,122,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.1rem;
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    text-align: center;
+    padding: 80px 24px 48px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-family: 'Caveat', cursive;
+    color: var(--spice);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1.1;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 3px;
+    background: var(--spice);
+    margin: 20px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ─── CATEGORY TABS ─── */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 24px 48px;
+  }
+
+  .tab {
+    padding: 10px 24px;
+    border-radius: 100px;
+    border: 1.5px solid;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: transparent;
+  }
+
+  .tab[data-cat="places"] { border-color: var(--fern); color: var(--fern); }
+  .tab[data-cat="history"] { border-color: var(--terracotta); color: var(--terracotta); }
+  .tab[data-cat="food"] { border-color: var(--gold); color: #a07010; }
+  .tab[data-cat="culture"] { border-color: #7a5aa0; color: #7a5aa0; }
+  .tab[data-cat="all"].active, .tab[data-cat="all"] { border-color: var(--forest); color: var(--forest); }
+
+  .tab:hover, .tab.active {
+    color: white !important;
+  }
+  .tab[data-cat="all"].active, .tab[data-cat="all"]:hover { background: var(--forest); }
+  .tab[data-cat="places"].active, .tab[data-cat="places"]:hover { background: var(--fern); }
+  .tab[data-cat="history"].active, .tab[data-cat="history"]:hover { background: var(--terracotta); }
+  .tab[data-cat="food"].active, .tab[data-cat="food"]:hover { background: var(--gold); }
+  .tab[data-cat="culture"].active, .tab[data-cat="culture"]:hover { background: #7a5aa0; }
+
+  /* ─── CARD GRID ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(26,46,26,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: cardIn 0.5s ease both;
+    position: relative;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(26,46,26,0.18);
+  }
+
+  .card.hidden { display: none; }
+
+  .card-color-strip {
+    height: 5px;
+  }
+  .cat-places .card-color-strip { background: var(--fern); }
+  .cat-history .card-color-strip { background: var(--terracotta); }
+  .cat-food .card-color-strip { background: var(--gold); }
+  .cat-culture .card-color-strip { background: #7a5aa0; }
+
+  .card-body { padding: 24px; }
+
+  .card-category {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .cat-places .card-category { color: var(--fern); }
+  .cat-history .card-category { color: var(--terracotta); }
+  .cat-food .card-category { color: #a07010; }
+  .cat-culture .card-category { color: #7a5aa0; }
+
+  .card-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 16px;
+  }
+
+  .card-story {
+    background: var(--cream);
+    border-left: 3px solid;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .cat-places .card-story { border-color: var(--fern); }
+  .cat-history .card-story { border-color: var(--terracotta); }
+  .cat-food .card-story { border-color: var(--gold); }
+  .cat-culture .card-story { border-color: #7a5aa0; }
+
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    background: var(--cream);
+    border-radius: 100px;
+    padding: 4px 10px;
+    color: #666;
+  }
+
+  /* ─── HIGHLIGHT STRIP ─── */
+  .highlight-strip {
+    background: var(--forest);
+    padding: 80px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlight-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 100% at 50% 50%, rgba(74,122,74,0.2) 0%, transparent 70%);
+  }
+
+  .highlight-strip h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--cream);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .highlight-strip h2 em { color: var(--gold); font-style: italic; }
+
+  .highlight-strip p {
+    color: var(--mist);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .highlight-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--mist);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ─── TIPS SECTION ─── */
+  .tips-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .tip-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(26,46,26,0.07);
+  }
+
+  .tip-icon { font-size: 1.8rem; margin-bottom: 12px; }
+  .tip-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 8px;
+  }
+  .tip-text { font-size: 0.85rem; color: #666; line-height: 1.7; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    padding: 40px 32px;
+    text-align: center;
+  }
+
+  footer p {
+    color: rgba(200,216,196,0.5);
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .cards-grid { grid-template-columns: 1fr; padding: 0 16px 60px; }
+    .nav-links { display: none; }
+    .highlight-stats { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-leaves" id="leaves"></div>
+  <div class="hero-tag">🌿 Kerala's Best Kept Secrets</div>
+  <h1 class="hero-title">Hidden<br><em>Wayanad</em></h1>
+  <p class="hero-subtitle">Beyond the tourist trail</p>
+  <p class="hero-desc">Wayanad is more than misty peaks and popular waterfalls. Tucked inside its forests are ancient caves with 5,000-year-old carvings, a town named after an ammunition dump, a tree chained to a ghost, and tribal warriors who fought the British with bows and arrows. This is that Wayanad.</p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Hidden Wayanad</div>
+  <ul class="nav-links">
+    <li><a href="#gems">Hidden Gems</a></li>
+    <li><a href="#tips">Travel Tips</a></li>
+  </ul>
+</nav>
+
+<!-- SECTION HEADER -->
+<div class="section-header" id="gems">
+  <span class="section-tag">Explore the unknown</span>
+  <h2 class="section-title">Hidden Gems of Wayanad</h2>
+  <div class="section-line"></div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="tabs">
+  <button class="tab active" data-cat="all" onclick="filterCards('all')">All Gems</button>
+  <button class="tab" data-cat="places" onclick="filterCards('places')">🌿 Hidden Places</button>
+  <button class="tab" data-cat="history" onclick="filterCards('history')">🏛️ Strange History</button>
+  <button class="tab" data-cat="food" onclick="filterCards('food')">🍛 Food Joints</button>
+  <button class="tab" data-cat="culture" onclick="filterCards('culture')">🥁 Tribal Culture</button>
+</div>
+
+<!-- CARDS -->
+<div class="cards-grid" id="cardsGrid">
+
+  <!-- HIDDEN PLACES -->
+
+  <div class="card cat-places" data-cat="places">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🦅</span>
+      <div class="card-category">Hidden Places</div>
+      <h3 class="card-title">Pakshipathalam — The Birds' Rock Cave</h3>
+      <p class="card-desc">Buried deep inside the Brahmagiri forest range, Pakshipathalam is a network of caves and rock formations accessible only by a strenuous 7 km trek. The name literally means "dwelling place of birds," and the place earns it — the forest canopy hosts rare hornbills, Malabar grey hornbills, and countless species barely seen elsewhere.</p>
+      <div class="card-story">"Not a tourist spot — it's a proper wilderness expedition. You need permits, a forest guide, and a genuine willingness to get muddy. Most visitors give up halfway, which means the people who make it have the caves entirely to themselves."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Brahmagiri Hills, ~30km from Mananthavady</span>
+        <span class="meta-tag">🎫 Forest permit required</span>
+        <span class="meta-tag">🥾 Strenuous trek</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-places" data-cat="places">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">💀</span>
+      <div class="card-category">Hidden Places</div>
+      <h3 class="card-title">Phantom Rock (Cheengeri Mala) — The Skull on the Hill</h3>
+      <p class="card-desc">A natural rock formation near Sulthan Bathery that bears an uncanny resemblance to a human skull — depending on the angle you look at it. The short trek through scrub forest to reach it is half the fun, with panoramic views of paddy fields and misty Western Ghats ridges stretching into Karnataka.</p>
+      <div class="card-story">"Locals call it Cheengeri Mala. The 'phantom' name is a recent tourist invention. But the rock genuinely looks like a skull. Best seen at sunrise when the morning mist is still low and dramatic."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Near Sulthan Bathery</span>
+        <span class="meta-tag">🌅 Best at sunrise</span>
+        <span class="meta-tag">🆓 Free entry</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-places" data-cat="places">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🏔️</span>
+      <div class="card-category">Hidden Places</div>
+      <h3 class="card-title">Thollayiram Kandi — The Secret Valley</h3>
+      <p class="card-desc">A hidden valley hemmed in by misty mountains, almost entirely unknown to outsiders. The hiking trails are surprisingly gentle, and the summit offers a panorama of overlapping ridgelines disappearing into clouds. No tea stalls, no selfie spots — just silence and the occasional distant sound of a waterfall.</p>
+      <div class="card-story">"This is what Wayanad looked like before Instagram. Locals here are genuinely surprised to see visitors. Go before it's 'discovered.'"</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Interior Wayanad</span>
+        <span class="meta-tag">🥾 Easy-moderate trek</span>
+        <span class="meta-tag">🧭 Local guide recommended</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-places" data-cat="places">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🏊</span>
+      <div class="card-category">Hidden Places</div>
+      <h3 class="card-title">Kanthanpara Falls — Wayanad's Quiet Waterfall</h3>
+      <p class="card-desc">While Soochipara and Meenmutty attract the crowds, Kanthanpara sits near Meppadi without a lot of fanfare. Surrounded by thick forest and rocky terrain, the waterfall flows into a calm pool that's perfect for wading. The absence of crowds makes it feel genuinely wild.</p>
+      <div class="card-story">"October to January is the sweet spot — good water flow, no monsoon access issues, and you might have the pool to yourself on a weekday."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Near Meppadi</span>
+        <span class="meta-tag">🗓️ Oct–Jan best</span>
+        <span class="meta-tag">💧 Swimming possible</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-places" data-cat="places">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🌊</span>
+      <div class="card-category">Hidden Places</div>
+      <h3 class="card-title">Karlad Lake — The Forgotten Lake</h3>
+      <p class="card-desc">Wayanad's second-largest freshwater lake sits about 15 km from Kalpetta, largely ignored in favour of the more photogenic Pookode Lake. Managed by DTPC, it offers kayaking, bamboo rafting, zip-lining, and rock climbing — a full adventure day with almost no tourist buzz.</p>
+      <div class="card-story">"Pookode gets all the brochure space. Karlad gets all the action. The bamboo rafting here is genuinely good fun and the lake views are stunning."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 ~15km from Kalpetta</span>
+        <span class="meta-tag">🚣 Kayaking & rafting</span>
+        <span class="meta-tag">🏕️ Family friendly</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-places" data-cat="places">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🌿</span>
+      <div class="card-category">Hidden Places</div>
+      <h3 class="card-title">Tholpetty Wildlife Sanctuary — The Unbranded Safari</h3>
+      <p class="card-desc">Muthanga Wildlife Sanctuary gets all the tourist packages, but Tholpetty — a quieter section of the Wayanad Wildlife Sanctuary near the Kerala-Karnataka border — offers equally rich sightings: elephants, sambar, leopards, wild dogs — with far smaller jeep queues. It's less commercialized but the animals don't know the difference.</p>
+      <div class="card-story">"The dawn safaris here are something else. No noise, no crowds. You hear the forest waking up, which is the whole point."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Near Thirunelli</span>
+        <span class="meta-tag">🐘 Elephant sightings</span>
+        <span class="meta-tag">🌄 Dawn safaris</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+
+  <div class="card cat-history" data-cat="history">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">⛓️</span>
+      <div class="card-category">Strange History</div>
+      <h3 class="card-title">The Chain Tree of Lakkidi — Ghost of a Betrayed Guide</h3>
+      <p class="card-desc">Near the Thamarassery Ghat pass at Lakkidi, a large ancient fig tree stands wrapped in heavy chains. The story behind it is one of Wayanad's most haunting: a tribal chieftain named Karinthandan (who lived around 1700–1750) helped a British engineer discover a safe route through the treacherous ghats — and was murdered for it to prevent him from sharing the credit.</p>
+      <div class="card-story">"After his death, accidents plagued travellers on that stretch. A priest was summoned, rituals performed, and his spirit was symbolically 'chained' to the tree to stop the hauntings. The tree is still there. The chain is still real. Local drivers still offer a quick prayer before the ghat descent."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Lakkidi, NH-212</span>
+        <span class="meta-tag">🕰️ c. 1700–1750 AD</span>
+        <span class="meta-tag">🌟 Folklore landmark</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-history" data-cat="history">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🕌</span>
+      <div class="card-category">Strange History</div>
+      <h3 class="card-title">Sulthan Bathery's Jain Temple — A Name from an Ammo Dump</h3>
+      <p class="card-desc">The town of Sulthan Bathery gets its name from a rather peculiar piece of history. A 13th-century Jain temple built in the Vijayanagara style — granite pillars, carved mandapas, serene Tirthankaras — was converted by Tipu Sultan into an ammunition battery (a "bathery") during his march to the Malabar coast. The town took the Sultan's battery as its name.</p>
+      <div class="card-story">"Wayanad was once a Jain stronghold along the spice trade routes. Almost no one talks about this. The temple itself is a protected monument, still standing quietly in a leafy compound — one of the very few Jain temples in all of Kerala."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Sulthan Bathery town</span>
+        <span class="meta-tag">🏛️ 13th century</span>
+        <span class="meta-tag">🆓 ASI protected</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-history" data-cat="history">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🗿</span>
+      <div class="card-category">Strange History</div>
+      <h3 class="card-title">Edakkal Caves — Stone Age Graffiti</h3>
+      <p class="card-desc">Edakkal's engravings are among India's oldest — dating back over 5,000 years to the Neolithic era, with some layers from the Bronze Age. The carvings depict human figures, animals, tools, and symbols that hint at trade route markers and ritual art. What's striking: the same cave was used across thousands of years by different peoples, creating a palimpsest of civilizations.</p>
+      <div class="card-story">"The caves were 'discovered' by the British in 1894, but local tribes had known about them forever. Many of the symbols remain undeciphered. Some believe the writings are proto-Dravidian script — if true, it would rewrite South Indian history."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Near Sulthan Bathery</span>
+        <span class="meta-tag">🗓️ 5000+ years old</span>
+        <span class="meta-tag">🎫 Entry fee applies</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-history" data-cat="history">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">⚔️</span>
+      <div class="card-category">Strange History</div>
+      <h3 class="card-title">Pazhassi Raja's Guerilla War — The Lion of Kerala</h3>
+      <p class="card-desc">Between 1795 and 1805, Kerala Varma Pazhassi Raja waged a decade-long guerilla resistance against the British East India Company using Wayanad's forests as his battlefield. His army included Kurichiya tribal archers — arguably among the most formidable forest fighters the British encountered in South India. He was never captured. He died in battle in 1805.</p>
+      <div class="card-story">"His tomb near Mananthavady is a quiet, mostly overlooked monument. No elaborate memorial, no major tourist signage. Just a modest shrine where one of Kerala's greatest freedom fighters rests — fighting the British 150 years before independence."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Tomb near Mananthavady</span>
+        <span class="meta-tag">🗓️ 1795–1805</span>
+        <span class="meta-tag">🏹 Kurichiya warriors</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-history" data-cat="history">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🏺</span>
+      <div class="card-category">Strange History</div>
+      <h3 class="card-title">Ambalavayal Heritage Museum — Where Hero Stones Tell War Stories</h3>
+      <p class="card-desc">This under-visited museum in Ambalavayal, 12 km from Sulthan Bathery, holds one of Kerala's largest collections of tribal artefacts — stone weapons, 14th–16th century sculptures, Megalithic pottery, terracotta figures, and haunting "Veerakallu" (hero stones). These carved memorial rocks were erected on the tombs of warriors — including some that commemorate people who caught cattle thieves.</p>
+      <div class="card-story">"The museum has four galleries: Veerasmruthi (warriors), Devasmruthi (deities), Gothrasmruthi (tribes), and Jeevanasmruthi (life). Entry is ₹20. Most tourist groups walk past it to get to Edakkal Caves next door."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Ambalavayal, ~12km from Sulthan Bathery</span>
+        <span class="meta-tag">🎫 Entry: ₹20</span>
+        <span class="meta-tag">🏛️ Open all days</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOD -->
+
+  <div class="card cat-food" data-cat="food">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🏚️</span>
+      <div class="card-category">Food Joints</div>
+      <h3 class="card-title">1980's A Nostalgic Restaurant — An Old Tharavadu Reborn</h3>
+      <p class="card-desc">Housed in a converted old tharavadu (ancestral home) near Vythiri, this restaurant is all wooden beams, vintage photographs, and the smell of coconut oil and spices. The menu leans deep into Malabari — fish curry with rice, Malabar paratha, buffalo leg curry, and goat brain for the adventurous. Locals and long-haul travellers both swear by it.</p>
+      <div class="card-story">"It's the kind of place where the menu is more of a suggestion. Ask what's fresh that day. The sadhya on weekends is extraordinary."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Vythiri, Sentinel Rock Estates Rd</span>
+        <span class="meta-tag">🍽️ Malabari cuisine</span>
+        <span class="meta-tag">💰 Budget-friendly</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-food" data-cat="food">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">☕</span>
+      <div class="card-category">Food Joints</div>
+      <h3 class="card-title">The Coffee Grove — Appam & Stew Among Plantations</h3>
+      <p class="card-desc">Located at Chuzhali near Bavali, this restaurant is set on a working estate that grows the very coffee it serves. The speciality is appam with vegetable stew — a classic Kerala breakfast that tastes completely different when the coconut milk is fresh and the appam is made to order in the cool hill air.</p>
+      <div class="card-story">"There's something about eating appam with stew while looking out at a coffee plantation in the morning mist. No amount of restaurant ambiance can replicate that."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Chuzhali, Bavali</span>
+        <span class="meta-tag">☕ Estate coffee</span>
+        <span class="meta-tag">🌄 Morning visits ideal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-food" data-cat="food">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🍛</span>
+      <div class="card-category">Food Joints</div>
+      <h3 class="card-title">Jubilee Restaurant, Sultan Bathery — Malabar Biryani Done Right</h3>
+      <p class="card-desc">A no-frills, well-established culinary landmark in Sultan Bathery that serves authentic Malabar cuisine: chicken dum biryani, beef biryani, sea food chatti choru, prawn masala. The "chatti choru" (earthen pot rice) with seafood is the dish locals point to when asked what to order. Often crowded on weekends but the quality holds.</p>
+      <div class="card-story">"The biryani here is Malabar-style — fragrant, not spice-bomb heavy, with tender meat. It's the kind of biryani that's been made the same way for 30 years and doesn't need to change."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Sultan Bathery town</span>
+        <span class="meta-tag">🍖 Non-veg specialist</span>
+        <span class="meta-tag">⭐ Local favourite</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-food" data-cat="food">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🫙</span>
+      <div class="card-category">Food Joints</div>
+      <h3 class="card-title">The Bungalow Restaurant — Heritage Bungalow Dining</h3>
+      <p class="card-desc">Set inside an old colonial-era bungalow in Vythiri, this restaurant leans into old-world charm — vintage decor, stone floors, and a menu that blends local Kerala dishes with Continental influences. The pepper chicken curry is consistently excellent. The porrotta (layered flatbread) is properly flaky. Worth the stop if you're passing through Vythiri.</p>
+      <div class="card-story">"The building itself is the story. There's something about eating in a century-old bungalow that used to house British estate managers. The aesthetic is effortless because it's genuine."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Old Vythiri</span>
+        <span class="meta-tag">🏡 Heritage property</span>
+        <span class="meta-tag">🍽️ Kerala + Continental</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-food" data-cat="food">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🌿</span>
+      <div class="card-category">Food Joints</div>
+      <h3 class="card-title">Olan Restaurant — Nadan Kerala Classics</h3>
+      <p class="card-desc">A newer spot that's become a word-of-mouth favourite among Wayanad's food community. Dedicated to traditional Kerala nadan (country-style) cooking — dishes like olan (ash gourd and coconut milk), erissery, kaalan, and paal parotta that are disappearing from most mainstream menus. The chefs here are deeply protective of these recipes.</p>
+      <div class="card-story">"Paal parotta is one of those dishes that requires patience to make — soaking fried parotta in sweetened milk. Most places won't bother. This one does."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Wayanad</span>
+        <span class="meta-tag">🌱 Nadan cuisine</span>
+        <span class="meta-tag">🤫 Word-of-mouth spot</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CULTURE -->
+
+  <div class="card cat-culture" data-cat="culture">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🏹</span>
+      <div class="card-category">Tribal Culture</div>
+      <h3 class="card-title">Kurichiya Tribe — Archers Who Fought the British</h3>
+      <p class="card-desc">The Kurichiya tribe, locally called "Malai Brahmins" or Hill Brahmins, sit at the top of Wayanad's tribal hierarchy. Their name comes from "kuri vechavan" — "he who took aim." They constituted Pazhassi Raja's guerilla army and were feared by the British for their archery. The descendants of those warriors are still expert archers, and their martial traditions are still practiced in villages today.</p>
+      <div class="card-story">"They are also known for 'Nellukuthu pattu' — a harvest song-dance performed during paddy threshing. Small landowners, deeply proud people. If you want to experience genuine Wayanad, spending time in a Kurichiya village is where to start."</div>
+      <div class="card-meta">
+        <span class="meta-tag">🏹 Expert archers</span>
+        <span class="meta-tag">🎵 Nellukuthu pattu</span>
+        <span class="meta-tag">📍 Mananthavady region</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-culture" data-cat="culture">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🎭</span>
+      <div class="card-category">Tribal Culture</div>
+      <h3 class="card-title">Paniya Tribe — Dance, Devotion, and a Slave History</h3>
+      <p class="card-desc">The Paniyas are one of Wayanad's largest tribal communities. "Paniya" means "worker" — they were historically the labouring community of the region, often treated as bonded labour until the mid-20th century. They are celebrated for their elaborate, hypnotic dance forms that enact stories from their oral tradition. Witnessing a Paniya performance in a village setting is a genuinely moving experience.</p>
+      <div class="card-story">"Unlike tourist-packaged cultural shows, Paniya dances in their own settlements are communal events — extended, participatory, and completely different from anything you'd see in a hotel ballroom."</div>
+      <div class="card-meta">
+        <span class="meta-tag">🎵 Oral dance traditions</span>
+        <span class="meta-tag">🌾 Agricultural heritage</span>
+        <span class="meta-tag">📍 Throughout Wayanad</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-culture" data-cat="culture">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🎋</span>
+      <div class="card-category">Tribal Culture</div>
+      <h3 class="card-title">Uravu Bamboo Craft Village — Where the Forest Becomes Art</h3>
+      <p class="card-desc">Uravu is a grassroots social enterprise near Thirunelli that employs tribal communities in bamboo craft and sustainable design. Their workshop produces furniture, household items, and architectural elements using local bamboo — and allows visitors to watch craftspeople at work. The Kurumba tribe, known for their basketry and pottery, are among the artisans working here.</p>
+      <div class="card-story">"Uravu started as a livelihood project for displaced tribal families. It became something much larger — an internationally recognized model for bamboo craft. Their products are genuinely beautiful."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Near Thirunelli</span>
+        <span class="meta-tag">🎋 Bamboo crafts</span>
+        <span class="meta-tag">🛒 Products for sale</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-culture" data-cat="culture">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🕌</span>
+      <div class="card-category">Tribal Culture</div>
+      <h3 class="card-title">Varambetta Mosque — 700 Years of Faith in the Hills</h3>
+      <p class="card-desc">One of Wayanad's oldest mosques, the Varambetta Mosque near Kalpetta dates back around 700 years and is an example of the Indo-Saracenic architectural style. The building itself is less dramatic than its age suggests — which is precisely the point. It sits in quiet surroundings, largely unknown to tourists, a remnant of Wayanad's forgotten history as a crossroads of spice traders and Islamic merchants from the coast.</p>
+      <div class="card-story">"The spice trade brought Arab and Mappila Muslim merchants deep into the Western Ghats centuries before European colonization. This mosque is that history made physical."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Near Kalpetta</span>
+        <span class="meta-tag">🏛️ ~700 years old</span>
+        <span class="meta-tag">🕊️ Still active</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card cat-culture" data-cat="culture">
+    <div class="card-color-strip"></div>
+    <div class="card-body">
+      <span class="card-emoji">🌺</span>
+      <div class="card-category">Tribal Culture</div>
+      <h3 class="card-title">Thirunelli Temple — The Kashi of the South</h3>
+      <p class="card-desc">Deep in the forests of Brahmagiri Hills, the Thirunelli Temple dedicated to Lord Vishnu is over a thousand years old. It's one of Kerala's most important pilgrimage sites but remains relatively unknown outside South India. Locals call it "Kashi of Kerala" — the Papanasini river flowing next to it is believed to wash away the sins of the deceased when their ashes are scattered here.</p>
+      <div class="card-story">"The forest location is the thing. The temple sits inside dense wilderness and the approach road on a monsoon morning — fog, birdsong, wet jungle — is an experience entirely separate from the religious significance."</div>
+      <div class="card-meta">
+        <span class="meta-tag">📍 Brahmagiri Hills</span>
+        <span class="meta-tag">🛕 1000+ years old</span>
+        <span class="meta-tag">🌿 Forest location</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /cards-grid -->
+
+<!-- HIGHLIGHT STRIP -->
+<div class="highlight-strip">
+  <h2>Wayanad is <em>layers deep</em></h2>
+  <p>Stone Age cave art, Jain temples turned ammo dumps, tribal warriors who held off the British East India Company for a decade, and ancient spice routes that linked these hills to the wider world. Most visitors see only the surface.</p>
+  <div class="highlight-stats">
+    <div class="stat">
+      <div class="stat-number">5,000+</div>
+      <div class="stat-label">Years of cave carvings at Edakkal</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">18</div>
+      <div class="stat-label">Scheduled Tribes still residing here</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">10yrs</div>
+      <div class="stat-label">Pazhassi Raja's guerilla war</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">700+</div>
+      <div class="stat-label">Species of birds recorded</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIPS SECTION -->
+<div class="tips-section" id="tips">
+  <div class="section-header" style="padding: 0 0 40px;">
+    <span class="section-tag">Before you go</span>
+    <h2 class="section-title">Traveller Tips</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🗓️</div>
+      <div class="tip-title">Best Time to Visit</div>
+      <div class="tip-text">October to February is ideal for most hidden places — comfortable temperatures, clear skies, and good waterfall flow. Monsoon (June–September) is dramatic but limits access to treks and caves.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🧭</div>
+      <div class="tip-title">Get a Local Guide</div>
+      <div class="tip-text">For Pakshipathalam, tribal village visits, and the more remote valleys, a local guide isn't optional — it's what transforms a walk into an experience. Ask your guesthouse or contact Wayanad Tourism directly.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📜</div>
+      <div class="tip-title">Forest Permits</div>
+      <div class="tip-text">Pakshipathalam and some Brahmagiri trails require advance permits from the Forest Department. Apply at the Mananthavady range office or check KFRI Thrissur for online options.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🍽️</div>
+      <div class="tip-title">Eat Like a Local</div>
+      <div class="tip-text">Skip the resort buffets for at least one meal. The best Wayanad food is found in small hotels in Kalpetta and Sultan Bathery markets — kanji (rice gruel), puttu, pazhampori, and locally grown black pepper chicken.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🤫</div>
+      <div class="tip-title">Respect Tribal Villages</div>
+      <div class="tip-text">Tribal settlements are not tourist attractions. Visit only with community permission and a guide who has an existing relationship with the village. Unsolicited photography is disrespectful and often unwelcome.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🚗</div>
+      <div class="tip-title">Getting Around</div>
+      <div class="tip-text">A self-drive car or hired cab is essential for most of these gems. KSRTC buses cover the main towns but hidden places like Tholpetty, Karlad Lake, and Pakshipathalam are not on any bus route.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Hidden Wayanad</div>
+  <p>A love letter to one of Kerala's most layered, most underestimated districts.<br>
+  Built with research, curiosity, and a deep respect for Wayanad's people and history.<br><br>
+  <em style="opacity:0.4">All information accurate as of 2025–26. Always verify permits and timings locally before visiting.</em></p>
+</footer>
+
+<script>
+// Floating leaves
+const leavesContainer = document.getElementById('leaves');
+const leafSymbols = ['🍃','🌿','🍀','🌱','🍂'];
+for (let i = 0; i < 18; i++) {
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf';
+  leaf.textContent = leafSymbols[Math.floor(Math.random() * leafSymbols.length)];
+  leaf.style.left = Math.random() * 100 + '%';
+  leaf.style.animationDuration = (12 + Math.random() * 20) + 's';
+  leaf.style.animationDelay = (Math.random() * 20) + 's';
+  leaf.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
+  leavesContainer.appendChild(leaf);
+}
+
+// Card filter
+function filterCards(cat) {
+  const cards = document.querySelectorAll('.card');
+  const tabs = document.querySelectorAll('.tab');
+
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+
+  cards.forEach((card, i) => {
+    const match = cat === 'all' || card.dataset.cat === cat;
+    card.classList.toggle('hidden', !match);
+    if (match) {
+      card.style.animationDelay = (i % 12) * 0.06 + 's';
+      card.style.animation = 'none';
+      card.offsetHeight; // reflow
+      card.style.animation = '';
+    }
+  });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .tip-card, .stat').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
